@@ -117,3 +117,30 @@ app.post('/login', function (request, response) {
         }
     })
 });
+
+app.post('/update-info',async (req,res)=>{
+    //let iduser=req.body.id;
+    let newusername=req.body.username;
+    let newpassword=req.body.password;
+    try{
+        console.log(newusername,newpassword);
+       const updateuser=await DataUser.findByIdAndUpdate('5ec6aef005d46d8bafcc829e',({
+            username:newusername,
+            password:newpassword
+        }));
+
+        if (!updateuser) {
+            res.json({
+                message: 'Update thành thất bại!'
+            })
+        } else {
+            res.json({
+                message: 'Update thành thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
