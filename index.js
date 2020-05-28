@@ -118,18 +118,18 @@ app.post('/login', function (request, response) {
     })
 });
 
+
+// update thông tin user
 app.post('/update-info', async (req, res) => {
     let idUser = req.body.id;
-    let newUsername = req.body.username;
     let newPassword = req.body.password;
     let newFullname = req.body.fullname;
     let newBirthday = req.body.birthday;
     let newTelephoneNumber = req.body.telephoneNumber;
     let newRole = req.body.role;
     try {
-        console.log(newUsername, newPassword,newFullname,newBirthday,newTelephoneNumber,newRole,idUser);
-        const updateuser = await DataUser.findByIdAndUpdate(id=idUser, ({
-            username: newUsername,
+        console.log( newPassword, newFullname, newBirthday, newTelephoneNumber, newRole, idUser);
+        const updateuser = await DataUser.findByIdAndUpdate(id = idUser, ({
             password: newPassword,
             fullname: newFullname,
             birthday: newBirthday,
@@ -140,11 +140,11 @@ app.post('/update-info', async (req, res) => {
 
         if (!updateuser) {
             res.json({
-                message: 'Update thành thất bại!'
+                message: 'Update thất bại!'
             })
         } else {
             res.json({
-                message: 'Update thành thành công!'
+                message: 'Update thành công!'
             })
         }
     } catch (e) {
@@ -153,3 +153,67 @@ app.post('/update-info', async (req, res) => {
         })
     }
 });
+
+
+// thêm thông tin user
+app.post('/add-manager', async (req, res) => {
+    let addUsername = req.body.username;
+    let addPassword = req.body.password;
+    let addFullname = req.body.fullname;
+    let addBirthday = req.body.birthday;
+    let addTelephoneNumber = req.body.telephoneNumber;
+    let addRole = req.body.role;
+    console.log(addUsername, addPassword, addFullname, addBirthday, addTelephoneNumber, addRole);
+    try {
+        const addDataUser = new DataUser({
+            username: addUsername,
+            password: addPassword,
+            fullname: addFullname,
+            birthday: addBirthday,
+            telephoneNumber: addTelephoneNumber,
+            role: addRole
+        });
+        if (!addDataUser) {
+            res.json({
+                message: 'Add thất bại!'
+            })
+        } else {
+            await addDataUser.save();
+            res.json({
+                message: 'Add thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+app.post('/remove-manager', async (req, res) => {
+    let idUser = req.body.id;
+    try{
+        const removeDataUser=await DataUser.findByIdAndDelete(id=idUser);
+        if (!removeDataUser){
+            res.json({
+                message: 'Remove thất bại!'
+            })
+        }else{
+            res.json({
+                message: 'Remove thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+app.get('/get-manager-list', async (req, res) => {
+    let role = req.query.role;
+    let dataManager=await DataUser.find({role:role});
+    res.send(dataManager);
+});
+
