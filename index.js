@@ -60,17 +60,17 @@ let upload = multer({
     }
 });
 
-app.get('/',async (req, res) => {
+app.get('/', async (req, res) => {
     let dataUser = await DataUser.find({});
 
-    let dataProduct=await DataProduct.find({});
+    let dataProduct = await DataProduct.find({});
 
-    let dataInvoice=await DataInvoice.find({});
+    let dataInvoice = await DataInvoice.find({});
 
-    let dataCustomer=await DataCustomer.find({});
-    try{
-        res.send([dataProduct,dataCustomer,dataInvoice,dataUser]);
-    }catch (e) {
+    let dataCustomer = await DataCustomer.find({});
+    try {
+        res.send([dataProduct, dataCustomer, dataInvoice, dataUser]);
+    } catch (e) {
         res.send('Có lỗi sảy ra khi lay du lieu ' + e.message)
     }
 });
@@ -86,12 +86,12 @@ app.post('/login1', async (req, res) => {
         const user = await DataUser.findOne(condition);
         if (!user) {
             res.send('Invalid numberphone or password !')
-        }else {
-             res.send(user);
+        } else {
+            res.send(user);
 
         }
     } catch (error) {
-         res.status(400).send(error);
+        res.status(400).send(error);
 
     }
 });
@@ -118,15 +118,24 @@ app.post('/login', function (request, response) {
     })
 });
 
-app.post('/update-info',async (req,res)=>{
-    //let iduser=req.body.id;
-    let newusername=req.body.username;
-    let newpassword=req.body.password;
-    try{
-        console.log(newusername,newpassword);
-       const updateuser=await DataUser.findByIdAndUpdate('5ec6aef005d46d8bafcc829e',({
-            username:newusername,
-            password:newpassword
+app.post('/update-info', async (req, res) => {
+    let idUser = req.body.id;
+    let newUsername = req.body.username;
+    let newPassword = req.body.password;
+    let newFullname = req.body.fullname;
+    let newBirthday = req.body.birthday;
+    let newTelephoneNumber = req.body.telephoneNumber;
+    let newRole = req.body.role;
+    try {
+        console.log(newUsername, newPassword,newFullname,newBirthday,newTelephoneNumber,newRole,idUser);
+        const updateuser = await DataUser.findByIdAndUpdate(id=idUser, ({
+            username: newUsername,
+            password: newPassword,
+            fullname: newFullname,
+            birthday: newBirthday,
+            telephoneNumber: newTelephoneNumber,
+            role: newRole
+
         }));
 
         if (!updateuser) {
@@ -138,7 +147,7 @@ app.post('/update-info',async (req,res)=>{
                 message: 'Update thành thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
