@@ -37,7 +37,7 @@ app.use(body.json());
 app.use(body.urlencoded({extended: true}));
 
 // chạy lên local host với port là 1212
-app.listen(1212);
+app.listen(process.env.PORT || 1212);
 console.log('Localhost: 1212');
 
 // lấy ảnh từ bộ nhớ
