@@ -27,10 +27,10 @@ let productSchema = require('./model/productSchema');
 let userSchema = require('./model/userSchema');
 
 // Tạo collision trong code
-let DataUser = mongoose.model('user', userSchema, 'user');
-let DataProduct = mongoose.model('product', productSchema, 'product');
-let DataInvoice = mongoose.model('invoice', invoiceSchema, 'invoice');
-let DataCustomer = mongoose.model('customer', customerSchema, 'customer');
+let Users = mongoose.model('user', userSchema, 'user');
+let Products = mongoose.model('product', productSchema, 'product');
+let Invoices = mongoose.model('invoice', invoiceSchema, 'invoice');
+let Customers = mongoose.model('customer', customerSchema, 'customer');
 
 app.use(body.json());
 // sử dụng thư viện để post
@@ -61,13 +61,13 @@ let upload = multer({
 });
 
 app.get('/', async (req, res) => {
-    let dataUser = await DataUser.find({});
+    let dataUser = await Users.find({});
 
-    let dataProduct = await DataProduct.find({});
+    let dataProduct = await Products.find({});
 
-    let dataInvoice = await DataInvoice.find({});
+    let dataInvoice = await Invoices.find({});
 
-    let dataCustomer = await DataCustomer.find({});
+    let dataCustomer = await Customers.find({});
     try {
         res.send([dataProduct, dataCustomer, dataInvoice, dataUser]);
     } catch (e) {
@@ -75,31 +75,11 @@ app.get('/', async (req, res) => {
     }
 });
 
-app.post('/login1', async (req, res) => {
-
-    let condition = {
-        username: req.body.username,
-        password: req.body.password,
-    };
-    console.log(req.body.username, req.body.password);
-    try {
-        const user = await DataUser.findOne(condition);
-        if (!user) {
-            res.send('Invalid numberphone or password !')
-        } else {
-            res.send(user);
-
-        }
-    } catch (error) {
-        res.status(400).send(error);
-
-    }
-});
 
 app.post('/login', function (request, response) {
     let username = request.body.username;
     let password = request.body.password;
-    DataUser.findOne({
+    Users.findOne({
         username: username,
         password: password
     }, function (error, user) {
@@ -122,24 +102,20 @@ app.post('/login', function (request, response) {
 // update thông tin user
 app.post('/update-info', async (req, res) => {
     let idUser = req.body.id;
-    let newPassword = req.body.password;
-    let newFullname = req.body.fullname;
-    let newBirthday = req.body.birthday;
-    let newTelephoneNumber = req.body.telephoneNumber;
-    let newRole = req.body.role;
+    let newfullName = req.body.fullName;
+    let newbirthday = req.body.birthday;
+    let newtelephoneNumber = req.body.telephoneNumber;
     try {
-        console.log( newPassword, newFullname, newBirthday, newTelephoneNumber, newRole, idUser);
-        const updateuser = await DataUser.findByIdAndUpdate(id = idUser, ({
-            password: newPassword,
-            fullname: newFullname,
-            birthday: newBirthday,
-            telephoneNumber: newTelephoneNumber,
-            role: newRole
+        console.log(newfullName, newbirthday, newtelephoneNumber, idUser);
+        const updateUser = await Users.findOneAndUpdate(id = idUser, ({
+            fullName: newfullName,
+            birthday: newbirthday,
+            telephoneNumber: newtelephoneNumber,
 
         }));
 
-        if (!updateuser) {
-            res.json({
+        if (!updateUser) {
+            res.status(400).json({
                 message: 'Update thất bại!'
             })
         } else {
@@ -154,33 +130,59 @@ app.post('/update-info', async (req, res) => {
     }
 });
 
+// update password
+app.post('/update-pass', async (req, res) => {
+    let idUser = req.body.id;
+    let newpassword = req.body.password;
+    try {
+        console.log( newpassword,idUser);
+        const updateUser = await DataUser.findOneAndUpdate(id = idUser, ({
+            password: newPassword,
+        }));
+
+        if (!updateUser) {
+            res.status(400).json({
+                message: 'Update password thất bại!'
+            })
+        } else {
+            res.json({
+                message: 'Update password thành công!'
+            })
+        }
+    } catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
 
 // thêm thông tin user
-app.post('/add-manager', async (req, res) => {
-    let addUsername = req.body.username;
-    let addPassword = req.body.password;
-    let addFullname = req.body.fullname;
-    let addBirthday = req.body.birthday;
-    let addTelephoneNumber = req.body.telephoneNumber;
-    let addRole = req.body.role;
-    console.log(addUsername, addPassword, addFullname, addBirthday, addTelephoneNumber, addRole);
+app.post('/add-user', async (req, res) => {
+    let addusername = req.body.username;
+    let addpassword = req.body.password;
+    let addfullName = req.body.fullName;
+    let addbirthday = req.body.birthday;
+    let addtelephoneNumber = req.body.telephoneNumber;
+    let addrole = req.body.role;
+    console.log(addusername, addpassword, addfullName, addbirthday, addtelephoneNumber, addrole);
     try {
-        const addDataUser = new DataUser({
-            username: addUsername,
-            password: addPassword,
-            fullname: addFullname,
-            birthday: addBirthday,
-            telephoneNumber: addTelephoneNumber,
-            role: addRole
+        const addDataUser = new Users({
+            username: addusername,
+            password: addpassword,
+            fullName: addfullName,
+            birthday: addbirthday,
+            telephoneNumber: addtelephoneNumber,
+            role: addrole
         });
         if (!addDataUser) {
-            res.json({
-                message: 'Add thất bại!'
+            res.status(400).json({
+                message: 'Thêm thất bại!'
             })
         } else {
             await addDataUser.save();
             res.json({
-                message: 'Add thành công!'
+                message: 'Thêm thành công!'
             })
         }
     }catch (e) {
@@ -190,18 +192,18 @@ app.post('/add-manager', async (req, res) => {
     }
 });
 
-
-app.post('/remove-manager', async (req, res) => {
+// xóa thông tin user
+app.post('/remove-user', async (req, res) => {
     let idUser = req.body.id;
     try{
-        const removeDataUser=await DataUser.findByIdAndDelete(id=idUser);
+        const removeDataUser=await Users.findOneAndDelete(id=idUser);
         if (!removeDataUser){
-            res.json({
-                message: 'Remove thất bại!'
+            res.status(400).json({
+                message: 'Xóa thất bại!'
             })
         }else{
             res.json({
-                message: 'Remove thành công!'
+                message: 'Xóa thành công!'
             })
         }
     }catch (e) {
@@ -211,9 +213,11 @@ app.post('/remove-manager', async (req, res) => {
     }
 });
 
-app.get('/get-manager-list', async (req, res) => {
+
+// lấy danh sách user
+app.get('/get-user-list', async (req, res) => {
     let role = req.query.role;
-    let dataManager=await DataUser.find({role:role});
-    res.send(dataManager);
+    let staffList=await Users.find({role:role});
+    res.send(staffList);
 });
 
