@@ -198,7 +198,7 @@ app.post('/add-user', async (req, res) => {
 app.post('/remove-user', async (req, res) => {
     let idUser = req.body.id;
     try{
-        const removeDataUser=await Users.findOneAndDelete(id=idUser);
+        const removeDataUser=await Users.findByIdAndDelete(id=idUser);
         if (!removeDataUser){
             res.status(400).json({
                 message: 'Xóa thất bại!'
@@ -223,3 +223,194 @@ app.get('/get-user-list', async (req, res) => {
     res.send(staffList);
 });
 
+
+// thêm thông tin customer
+app.post('/add-customer', async (req, res) => {
+    let addcustomerName = req.body.customerName;
+    let addcustomerPhone = req.body.customerPhone;
+    let addcustomerInvoiceSum = req.body.customerInvoiceSum;
+
+    console.log(addcustomerName, addcustomerPhone, addcustomerInvoiceSum);
+    try {
+        const addDataCustomer = new Customers({
+            customerName: addcustomerName,
+            customerPhone: addcustomerPhone,
+            customerInvoiceSum: addcustomerInvoiceSum,
+        });
+        if (!addDataCustomer) {
+            res.status(400).json({
+                message: 'Thêm thất bại!'
+            })
+        } else {
+            await addDataCustomer.save();
+            res.json({
+                message: 'Thêm thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+// sửa thông tin customer
+app.post('/update-customer', async (req, res) => {
+    let id = req.body.id;
+    let newcustomerName = req.body.customerName;
+    let newcustomerPhone = req.body.customerPhone;
+    let newcustomerInvoiceSum = req.body.customerInvoiceSum;
+    try {
+        console.log(newcustomerName, newcustomerPhone, newcustomerInvoiceSum, id);
+        const updateCustomer = await Customers.findByIdAndUpdate(id = id, ({
+            customerName: newcustomerName,
+            customerPhone: newcustomerPhone,
+            customerInvoiceSum: newcustomerInvoiceSum,
+
+        }));
+
+        if (!updateCustomer) {
+            res.status(400).json({
+                message: 'Update thất bại!'
+            })
+        } else {
+            res.json({
+                message: 'Update thành công!'
+            })
+        }
+    } catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+// xóa thông tin customer
+app.post('/remove-customer', async (req, res) => {
+    let id = req.body.id;
+    try{
+        const removeDataCustomer=await Customers.findByIdAndDelete(id=id);
+        if (!removeDataCustomer){
+            res.status(400).json({
+                message: 'Xóa thất bại!'
+            })
+        }else{
+            res.json({
+                message: 'Xóa thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+// lấy danh sách custommer
+app.get('/get-customer-list', async (req, res) => {
+    let customerList=await Customers.find({});
+    res.send(customerList);
+});
+
+
+// thêm thông tin product
+app.post('/add-product', async (req, res) => {
+    let addproductName = req.body.productName;
+    let addproductPrice = req.body.productPrice;
+    let addproductImage = req.body.productImage;
+    let addproductType = req.body.productType;
+    let addproductExport = req.body.productExport;
+
+    console.log(addproductName, addproductPrice, addproductImage,addproductType,addproductExport);
+    try {
+        const addDataProduct = new Products({
+            productName: addproductName,
+            productPrice: addproductPrice,
+            productImage: addproductImage,
+            productType:addproductType,
+            productExport:addproductExport
+        });
+        if (!addDataProduct) {
+            res.status(400).json({
+                message: 'Thêm thất bại!'
+            })
+        } else {
+            await addDataProduct.save();
+            res.json({
+                message: 'Thêm thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+// sửa thông tin product
+app.post('/update-product', async (req, res) => {
+    let id = req.body.id;
+    let newproductName = req.body.productName;
+    let newproductPrice = req.body.productPrice;
+    let newproductImage = req.body.productImage;
+    let newproductType = req.body.productType;
+    let newproductExport = req.body.productExport;
+    try {
+        console.log(newproductName, newproductPrice, newproductImage, id,newproductType,newproductExport);
+        const updateProduct = await Products.findByIdAndUpdate(id = id, ({
+            productName: newproductName,
+            productPrice: newproductPrice,
+            productImage: newproductImage,
+            productType:newproductType,
+            productExport:newproductExport
+
+        }));
+
+        if (!updateProduct) {
+            res.status(400).json({
+                message: 'Update thất bại!'
+            })
+        } else {
+            res.json({
+                message: 'Update thành công!'
+            })
+        }
+    } catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+// xóa thông tin product
+app.post('/remove-product', async (req, res) => {
+    let id = req.body.id;
+    try{
+        const removeDataProduct=await Products.findByIdAndDelete(id=id);
+        if (!removeDataProduct){
+            res.status(400).json({
+                message: 'Xóa thất bại!'
+            })
+        }else{
+            res.json({
+                message: 'Xóa thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+// lấy danh sách product
+app.get('/get-product-list', async (req, res) => {
+    let productList=await Products.find({});
+    res.send(productList);
+});
