@@ -107,7 +107,7 @@ app.post('/update-info', async (req, res) => {
     let newtelephoneNumber = req.body.telephoneNumber;
     try {
         console.log(newfullName, newbirthday, newtelephoneNumber, idUser);
-        const updateUser = await Users.findOneAndUpdate(id = idUser, ({
+        const updateUser = await Users.findByIdAndUpdate(id = idUser, ({
             fullName: newfullName,
             birthday: newbirthday,
             telephoneNumber: newtelephoneNumber,
@@ -131,13 +131,15 @@ app.post('/update-info', async (req, res) => {
 });
 
 // update password
+
+// thay đổi findOneAndUpdate nếu không chỉ đổi đc giá trị đầu tiên ở trong bảng dữ liệu
 app.post('/update-pass', async (req, res) => {
     let idUser = req.body.id;
     let newpassword = req.body.password;
     try {
         console.log( newpassword,idUser);
-        const updateUser = await DataUser.findOneAndUpdate(id = idUser, ({
-            password: newPassword,
+        const updateUser = await Users.findOneAndUpdate(id = idUser, ({
+            password: newpassword,
         }));
 
         if (!updateUser) {
