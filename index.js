@@ -372,11 +372,11 @@ app.post('/update-product', async (req, res) => {
 
         if (!updateProduct) {
             res.status(400).json({
-                message: 'Update thất bại!'
+                message: 'Sửa sản phẩm thất bại!'
             })
         } else {
             res.json({
-                message: 'Update thành công!'
+                message: 'Sửa sản phẩm thành công!'
             })
         }
     } catch (e) {
@@ -413,4 +413,80 @@ app.post('/remove-product', async (req, res) => {
 app.get('/get-product-list', async (req, res) => {
     let productList=await Products.find({});
     res.send(productList);
+});
+
+
+// thêm thông tin invoice
+app.post('/add-invoice', async (req, res) => {
+    let addcustomerName = req.body.customerName;
+    let addproductName = req.body.productName;
+    let addnumberOfProduct = req.body.numberOfProduct;
+    let addcreateDate = req.body.createDate;
+    let addcreateStaff = req.body.createStaff;
+    let adddiscountPercentage = req.body.discountPercentage;
+    let addtotalValue = req.body.totalValue;
+    let addstate = req.body.state;
+
+
+    console.log(addcustomerName,addproductName, addnumberOfProduct, addcreateDate,addcreateStaff,adddiscountPercentage,addtotalValue,addstate);
+    try {
+        const addDataInvoice = new Invoices({
+            customerName:addcustomerName,
+            productName: addproductName,
+            numberOfProduct: addnumberOfProduct,
+            createDate: addcreateDate,
+            createStaff:addcreateStaff,
+            discountPercentage:adddiscountPercentage,
+            totalValue:addtotalValue,
+            state:addstate
+        });
+        if (!addDataInvoice) {
+            res.status(400).json({
+                message: 'Thêm thất bại!'
+            })
+        } else {
+            await addDataInvoice.save();
+            res.json({
+                message: 'Thêm thành công!'
+            })
+        }
+    }catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+app.post('/cancel-invoice', async (req, res) => {
+    let id = req.body.id;
+    let newstate = req.body.state;
+    try {
+        console.log( newstate,id);
+        const updateInvoice = await Invoices.findByIdAndUpdate(id = id, ({
+            state: newstate,
+        }));
+
+        if (!updateInvoice) {
+            res.status(400).json({
+                message: 'Hủy hóa đơn thất bại!'
+            })
+        } else {
+            res.json({
+                message: 'Hủy hóa đơn thành công!'
+            })
+        }
+    } catch (e) {
+        res.status(400).json({
+            message: 'Lỗi: ' + e
+        })
+    }
+});
+
+
+// lấy danh sách invoice
+app.get('/get-invoice-list', async (req, res) => {
+    let state = req.query.state;
+    let invoiceList=await Invoices.find({state:state});
+    res.send(invoiceList);
 });
