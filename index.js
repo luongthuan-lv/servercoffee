@@ -138,7 +138,7 @@ app.post('/update-pass', async (req, res) => {
     let newpassword = req.body.password;
     try {
         console.log( newpassword,idUser);
-        const updateUser = await Users.findOneAndUpdate(id = idUser, ({
+        const updateUser = await Users.findByIdAndUpdate(id = idUser, ({
             password: newpassword,
         }));
 
