@@ -116,11 +116,11 @@ app.post('/update-info', async (req, res) => {
 
         if (!updateUser) {
             res.status(400).json({
-                message: 'Update thất bại!'
+                message: 'Cập nhật thất bại!'
             })
         } else {
             res.json({
-                message: 'Update thành công!'
+                message: 'Cập nhật thành công!'
             })
         }
     } catch (e) {
@@ -144,11 +144,11 @@ app.post('/update-pass', async (req, res) => {
 
         if (!updateUser) {
             res.status(400).json({
-                message: 'Update password thất bại!'
+                message: 'Cập nhật mật khẩu thất bại!'
             })
         } else {
             res.json({
-                message: 'Update password thành công!'
+                message: 'Cập nhật mật khẩu thành công!'
             })
         }
     } catch (e) {
@@ -272,11 +272,11 @@ app.post('/update-customer', async (req, res) => {
 
         if (!updateCustomer) {
             res.status(400).json({
-                message: 'Update thất bại!'
+                message: 'Cập nhật thất bại!'
             })
         } else {
             res.json({
-                message: 'Update thành công!'
+                message: 'Cập nhật thành công!'
             })
         }
     } catch (e) {
