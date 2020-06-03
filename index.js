@@ -458,7 +458,7 @@ app.post('/add-invoice', async (req, res) => {
 });
 
 
-app.post('/cancel-invoice', async (req, res) => {
+app.post('/state-invoice', async (req, res) => {
     let id = req.body.id;
     let newstate = req.body.state;
     try {
@@ -469,11 +469,11 @@ app.post('/cancel-invoice', async (req, res) => {
 
         if (!updateInvoice) {
             res.status(400).json({
-                message: 'Hủy hóa đơn thất bại!'
+                message: 'Thay đổi trạng thái hóa đơn thất bại!'
             })
         } else {
             res.json({
-                message: 'Hủy hóa đơn thành công!'
+                message: 'Thay đổi trạng thái hóa đơn thành công!'
             })
         }
     } catch (e) {
