@@ -358,16 +358,14 @@ app.post('/update-product', async (req, res) => {
     let newproductPrice = req.body.productPrice;
     let newproductImage = req.body.productImage;
     let newproductType = req.body.productType;
-    let newproductExport = req.body.productExport;
+
     try {
-        console.log(newproductName, newproductPrice, newproductImage, id,newproductType,newproductExport);
+        console.log(newproductName, newproductPrice, newproductImage, id,newproductType);
         const updateProduct = await Products.findByIdAndUpdate(id = id, ({
             productName: newproductName,
             productPrice: newproductPrice,
             productImage: newproductImage,
             productType:newproductType,
-            productExport:newproductExport
-
         }));
 
         if (!updateProduct) {
