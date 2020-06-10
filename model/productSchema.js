@@ -17,7 +17,7 @@ const productSchema=new mongoose.Schema({
         required: true,
     },
     productExport:{
-        type: Integer,
+        type: Number,
         required: true,
     }
 });
