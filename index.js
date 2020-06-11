@@ -415,7 +415,7 @@ app.get('/get-product-list', async (req, res) => {
 
 // tìm kiếm danh sách product theo tên
 app.get('/search-product-list', async (req, res) => {
-    let productName=req.body.productName;
+    let productName=req.query.productName;
     let searchProduct=await Products.find({productName:productName});
     res.send(searchProduct);
 });
