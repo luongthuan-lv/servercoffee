@@ -413,6 +413,13 @@ app.get('/get-product-list', async (req, res) => {
     res.send(productList);
 });
 
+// tìm kiếm danh sách product theo tên
+app.get('/search-product-list', async (req, res) => {
+    let productName=req.body.productName;
+    let productList=await Products.find({productName:productName});
+    res.send(productList);
+});
+
 
 // thêm thông tin invoice
 app.post('/add-invoice', async (req, res) => {
