@@ -408,20 +408,20 @@ app.post('/remove-product', async (req, res) => {
 
 
 // lấy danh sách product
-app.get('/get-product-list', async (req, res) => {
-    let productList=await Products.find({});
-    res.send(productList);
-});
+// app.get('/get-product-list', async (req, res) => {
+//     let productList=await Products.find({});
+//     res.send(productList);
+// });
 
 // tìm kiếm danh sách product theo tên
-app.get('/search-product-list', async (req, res) => {
+app.get('/get-product-list', async (req, res) => {
     let productName=req.query.productName;
     if (productName==""){
-        let searchProduct=await Products.find({});
-        res.send(searchProduct);
+        let productList=await Products.find({});
+        res.send(productList);
     }else{
-        let searchProduct=await Products.find({productName:productName});
-        res.send(searchProduct);
+        let productList=await Products.find({productName:productName});
+        res.send(productList);
     }
 
 
