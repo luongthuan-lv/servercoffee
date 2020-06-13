@@ -413,7 +413,7 @@ app.post('/remove-product', async (req, res) => {
 //     res.send(productList);
 // });
 
-// tìm kiếm danh sách product theo tên
+// lấy danh sách product theo tên
 app.get('/get-product-list', async (req, res) => {
     let productName=req.query.productName;
     if (productName==""){
