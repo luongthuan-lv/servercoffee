@@ -416,13 +416,13 @@ app.post('/remove-product', async (req, res) => {
 // lấy danh sách product theo tên
 app.get('/get-product-list', async (req, res) => {
     let productName=req.query.productName;
-    // if (productName==""){
-    //     let productList=await Products.find({});
-    //     res.send(productList);
-    // }else{
+    if (productName==""){
+        let productList=await Products.find({});
+        res.send(productList);
+    }else{
         let productList=await Products.find({productName:productName});
         res.send(productList);
-    //}
+    }
 });
 
 
