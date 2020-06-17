@@ -6,11 +6,11 @@ const invoiceSchema=new mongoose.Schema({
     },
     productName:{
         type: String,
-        required: true,
+        required: false,
     },
     numberOfProduct:{
         type: Number,
-        required: true,
+        required: false,
     },
     createDate:{
         type: String,
