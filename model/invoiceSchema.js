@@ -5,11 +5,11 @@ const invoiceSchema=new mongoose.Schema({
         required: true,
     },
     productName:{
-        type: String,
+        type: Array,
         required: true,
     },
     numberOfProduct:{
-        type: String,
+        type: Array,
         required: true,
     },
     createDate:{
@@ -21,17 +21,18 @@ const invoiceSchema=new mongoose.Schema({
         required: true,
     },
     discountPercentage:{
-        type: String,
+        type: Number,
         required: true,
     },
     totalValue:{
-        type: String,
+        type: Number,
         required: true,
     },
     state:{
         type: String,
         required: true,
     },
+
 
 });
 module.exports=invoiceSchema;

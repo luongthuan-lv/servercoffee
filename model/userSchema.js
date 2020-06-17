@@ -6,7 +6,7 @@ const userSchema=new mongoose.Schema({
     },
     fullName:{
         type: String,
-        required: true,
+        required: false,
     },
     password:{
         type: String,
@@ -14,11 +14,11 @@ const userSchema=new mongoose.Schema({
     },
     birthday:{
         type: String,
-        required: true,
+        required: false,
     },
     telephoneNumber:{
         type: String,
-        required: true,
+        required: false,
     },
     role:{
         type: String,
