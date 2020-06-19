@@ -431,8 +431,8 @@ app.get('/get-product-list', async (req, res) => {
 // thêm thông tin invoice
 app.post('/add-invoice', async (req, res) => {
     let addcustomerName = req.body.customerName;
-    let addproductName = req.body.productName;
-    let addnumberOfProduct = req.body.numberOfProduct;
+    // let addproductName = req.body.productName;
+    // let addnumberOfProduct = req.body.numberOfProduct;
     let addcreateDate = req.body.createDate;
     let addcreateStaff = req.body.createStaff;
     let adddiscountPercentage = req.body.discountPercentage;
@@ -441,12 +441,12 @@ app.post('/add-invoice', async (req, res) => {
     let addlist=req.body.list;
 
 
-    console.log(addcustomerName,addproductName, addnumberOfProduct, addcreateDate,addcreateStaff,adddiscountPercentage,addtotalValue,addstate,addlist);
+    console.log(addcustomerName, addcreateDate,addcreateStaff,adddiscountPercentage,addtotalValue,addstate,addlist);
     try {
         const addDataInvoice = new Invoices({
             customerName:addcustomerName,
-            productName: addproductName,
-            numberOfProduct: addnumberOfProduct,
+            // productName: addproductName,
+            // numberOfProduct: addnumberOfProduct,
             createDate: addcreateDate,
             createStaff:addcreateStaff,
             discountPercentage:adddiscountPercentage,

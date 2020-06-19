@@ -4,14 +4,14 @@ const invoiceSchema=new mongoose.Schema({
         type: String,
         required: false,
     },
-    productName:{
-        type: Array,
-        required: false,
-    },
-    numberOfProduct:{
-        type: Array,
-        required: false,
-    },
+    // productName:{
+    //     type: Array,
+    //     required: false,
+    // },
+    // numberOfProduct:{
+    //     type: Array,
+    //     required: false,
+    // },
     createDate:{
         type: String,
         required: false,
