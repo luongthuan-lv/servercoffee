@@ -505,7 +505,7 @@ app.get('/get-invoice-list', async (req, res) => {
     res.send(invoiceList);
 });
 
-app.post('/sum-invoice', async (req, res) => {
+app.get('/sum-invoice', async (req, res) => {
     // const array1 = [1, 2, 3, 4];
     // const reducer = (accumulator, currentValue) => accumulator + currentValue;
     //
@@ -513,6 +513,10 @@ app.post('/sum-invoice', async (req, res) => {
     // console.log(array1.reduce(reducer));
     // res.send(array1.reduce(reducer));
 
-    let araysum= await Invoices.CoffeeManagement.distinct('totalValue');
-    res.send(araysum);
+    let araysum= Invoices.CoffeeManagement.distinct('totalValue');
+    let asr=Invoices.runCommand({
+        distinct: 'CoffeeManagement',
+        key: 'totalValue'
+    });
+    res.send(asr);
 })
