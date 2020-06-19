@@ -516,9 +516,9 @@ app.get('/sum-invoice', async (req, res) => {
    // let araysum=await Invoices.distinct("totalValue");
     let araysum=await Invoices.aggregate([
         { $match: { state: "active" } },
-        { total: { $sum: "$amount" } },
-        { $sort: { total: -1 } }
+        { total: { $sum: "$amount" } }
+
     ]);
 
     res.send(araysum);
-})
+});
