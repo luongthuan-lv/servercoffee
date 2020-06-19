@@ -505,7 +505,7 @@ app.get('/get-invoice-list', async (req, res) => {
     res.send(invoiceList);
 });
 
-app.get('/sum-invoice', async (req, res) => {
+app.post('/sum-invoice', async (req, res) => {
     // const array1 = [1, 2, 3, 4];
     // const reducer = (accumulator, currentValue) => accumulator + currentValue;
     //
