@@ -512,8 +512,8 @@ app.get('/sum-invoice', async (req, res) => {
     //
     // console.log(array1.reduce(reducer));
     // res.send(array1.reduce(reducer));
-
-    let araysum= db.Invoices.distinct('totalValue');
+  let xnx;
+    let araysum= db.Invoices.distinct('xnx');
 
 
     res.send(araysum);
