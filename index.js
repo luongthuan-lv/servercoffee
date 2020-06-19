@@ -513,10 +513,8 @@ app.get('/sum-invoice', async (req, res) => {
     // console.log(array1.reduce(reducer));
     // res.send(array1.reduce(reducer));
 
-    let araysum= Invoices.invoice.distinct('totalValue');
-    let asr=Invoices.runCommand({
-        distinct: 'CoffeeManagement',
-        key: 'totalValue'
-    });
+    let araysum= db.invoice.distinct('totalValue');
+
+    
     res.send(araysum);
 })
