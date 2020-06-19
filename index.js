@@ -501,7 +501,7 @@ app.post('/state-invoice', async (req, res) => {
 // lấy danh sách invoice
 app.get('/get-invoice-list', async (req, res) => {
     let state = req.query.state;
-    let invoiceList=await Invoices.find({state:'active'});
+    let invoiceList=await Invoices.find({state:state});
     res.send(invoiceList);
 });
 
@@ -512,8 +512,8 @@ app.get('/sum-invoice', async (req, res) => {
     //
     // console.log(array1.reduce(reducer));
     // res.send(array1.reduce(reducer));
-  let xnx;
-    let araysum= db.Invoices.distinct('xnx');
+  
+    let araysum= db.Invoices.distinct('totalValue');
 
 
     res.send(araysum);
