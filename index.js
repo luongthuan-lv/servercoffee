@@ -513,6 +513,6 @@ app.get('/sum-invoice', async (req, res) => {
     // console.log(array1.reduce(reducer));
     // res.send(array1.reduce(reducer));
 
-    let araysum= await Invoices.test.distinct('totalValue');
+    let araysum= await Invoices.test.distinct('list.productName');
     res.send(araysum);
 })
