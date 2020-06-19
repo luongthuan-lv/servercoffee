@@ -513,12 +513,12 @@ app.get('/sum-invoice', async (req, res) => {
     // console.log(array1.reduce(reducer));
     // res.send(array1.reduce(reducer));
 
-    let araysum=await Invoices.distinct("totalValue");
-    // let araysum=await Invoices.aggregate([
-    //     { $match: { state: "active" } },
-    //     { total: { $sum: "$amount" } }
-    //
-    // ]);
+   // let araysum=await Invoices.distinct("totalValue");
+    let araysum=await Invoices.aggregate([
+        { $match: { state: "active" } },
+        { total: { $sum: "$totalValue" } }
+
+    ]);
 
     res.send(araysum);
 });
