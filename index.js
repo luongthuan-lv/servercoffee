@@ -504,3 +504,12 @@ app.get('/get-invoice-list', async (req, res) => {
     let invoiceList=await Invoices.find({state:state});
     res.send(invoiceList);
 });
+
+app.get('/get-sum-invoice', async (req, res) => {
+    const array1 = [1, 2, 3, 4];
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+// 1 + 2 + 3 + 4
+    console.log(array1.reduce(reducer));
+    res.send(array1.reduce(reducer));
+})
