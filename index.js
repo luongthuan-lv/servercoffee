@@ -501,7 +501,7 @@ app.post('/state-invoice', async (req, res) => {
 // lấy danh sách invoice
 app.get('/get-invoice-list', async (req, res) => {
     let state = req.query.state;
-    let invoiceList=await Invoices.find({state:state});
+    let invoiceList=await Invoices.find({state:'active'});
     res.send(invoiceList);
 });
 
