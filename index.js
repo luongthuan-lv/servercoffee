@@ -438,9 +438,10 @@ app.post('/add-invoice', async (req, res) => {
     let adddiscountPercentage = req.body.discountPercentage;
     let addtotalValue = req.body.totalValue;
     let addstate = req.body.state;
+    let addlist=req.body.list;
 
 
-    console.log(addcustomerName,addproductName, addnumberOfProduct, addcreateDate,addcreateStaff,adddiscountPercentage,addtotalValue,addstate);
+    console.log(addcustomerName,addproductName, addnumberOfProduct, addcreateDate,addcreateStaff,adddiscountPercentage,addtotalValue,addstate,addlist);
     try {
         const addDataInvoice = new Invoices({
             customerName:addcustomerName,
@@ -450,7 +451,8 @@ app.post('/add-invoice', async (req, res) => {
             createStaff:addcreateStaff,
             discountPercentage:adddiscountPercentage,
             totalValue:addtotalValue,
-            state:addstate
+            state:addstate,
+            list:addlist,
         });
         if (!addDataInvoice) {
             res.status(400).json({

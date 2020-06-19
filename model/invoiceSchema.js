@@ -2,7 +2,7 @@ let mongoose=require('mongoose');
 const invoiceSchema=new mongoose.Schema({
     customerName:{
         type: String,
-        required: true,
+        required: false,
     },
     productName:{
         type: Array,
@@ -14,23 +14,23 @@ const invoiceSchema=new mongoose.Schema({
     },
     createDate:{
         type: String,
-        required: true,
+        required: false,
     },
     createStaff:{
         type: String,
-        required: true,
+        required: false,
     },
     discountPercentage:{
         type: Number,
-        required: true,
+        required: false,
     },
     totalValue:{
         type: Number,
-        required: true,
+        required: false,
     },
     state:{
         type: String,
-        required: true,
+        required: false,
     },
     list:{
         type: Array,
