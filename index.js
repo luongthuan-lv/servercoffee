@@ -514,7 +514,7 @@ app.get('/sum-invoice', async (req, res) => {
     // res.send(array1.reduce(reducer));
 
    // let araysum= Invoices.invoice.distinct("totalValue");
-    let araysum=db.invoice.aggregate([
+    let araysum=Invoices.invoice.aggregate([
         { $match: { state: "active" } },
         { total: { $sum: "$amount" } },
         { $sort: { total: -1 } }
