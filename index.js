@@ -514,6 +514,8 @@ app.get('/sum-invoice', async (req, res) => {
     // res.send(array1.reduce(reducer));
 
    // let araysum=await Invoices.distinct("totalValue");
+
+    // tổng tiền hóa đơn theo ngày
     let araysum=await Invoices.aggregate([
         { $match: { state: "active" } },
         { $group: { _id: "$createDate", total: { $sum: "$totalValue" } } },
