@@ -536,7 +536,7 @@ app.get('/sum-invoice', async (req, res) => {
                     }
             }},
         {$group: {_id: "$createDate", total: {$sum: "$totalValue"},count: {
-                    $sum: 1
+                    $sum: -1
                 }}},
 
 
