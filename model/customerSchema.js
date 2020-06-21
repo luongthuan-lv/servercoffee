@@ -9,7 +9,7 @@ const customerSchema=new mongoose.Schema({
         required: true,
     },
     customerInvoiceSum:{
-        type: String,
+        type: Number,
         required: true,
     }
 });
