@@ -523,7 +523,7 @@ app.get('/sum-invoice', async (req, res) => {
 
     ]);
 
-    let araysum1=await Products.aggregate([
+    let araysum1=await Products.dataSize(araysum)([
         { $count: "productExport" }
 
 
