@@ -537,12 +537,8 @@ app.get('/sum-invoice', async (req, res) => {
 
     ]);
 
-    let araysum3=await Invoices.find({
-        "createDate": {
-            $gte:new ISODate("2020-04-05T17:00:00.000+00:00"),
-            $lt:new ISODate("2020-05-05T17:00:00.000+00:00")
-        }
-    }).count();
+    let araysum3=await Invoices.find({"createDate":{ $gte:ISODate("2020-06-03"), $lt:ISODate("2020-06-10") }
+    }).pretty();
 
-    res.send(araysum);
+    res.send(araysum3);
 });
