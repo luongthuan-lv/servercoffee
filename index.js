@@ -522,7 +522,7 @@ app.get('/sum-invoice', async (req, res) => {
         {
             $project: {
                 // dataList: {
-                //     $filter: {
+                     $filter: {
                         // input: "$dataList",
                         // as: "item",
                         // cond: {
@@ -535,7 +535,7 @@ app.get('/sum-invoice', async (req, res) => {
                                 },
                             ]
                        // }
-                //     }
+                     }
                 // }
             }
         }
