@@ -519,26 +519,14 @@ app.get('/sum-invoice', async (req, res) => {
     let araysum=await Invoices.aggregate([
         { $match: { state: "active" } },
         { $group: { _id: "$createDate", total: { $sum: "$totalValue" } } },
-        // {
-        //     $project: {
-        //         // dataList: {
-        //              $filter: {
-        //                 // input: "$dataList",
-        //                 // as: "item",
-        //                 // cond: {
-        //                     $and: [
-        //                         {
-        //                             $gte: [ "$$createDate", new Date(`2020-04-05T17:00:00.000+00:00`) ]
-        //                         },
-        //                         {
-        //                             $lte: [ "$$createDate", new Date(`2020-05-05T17:00:00.000+00:00`) ]
-        //                         },
-        //                     ]
-        //                // }
-        //              }
-        //         // }
-        //     }
-        // }
+         {
+           $project: {
+               createDate: {
+                   $gte:new ISODate("2020-04-05T17:00:00.000+00:00"),
+                   $lte:new ISODate("2020-05-05T17:00:00.000+00:00")
+               }
+            }
+        }
 
 
     ]);
@@ -556,5 +544,5 @@ app.get('/sum-invoice', async (req, res) => {
         }
     }).count();
 
-    res.send(araysum3);
+    res.send(araysum);
 });
