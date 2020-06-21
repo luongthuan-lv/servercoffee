@@ -533,8 +533,8 @@ app.get('/sum-invoice', async (req, res) => {
             $match: {
                 state: "active",
                 createDate: {
-                    "$gte": '2020-04-05T17:00:00.000+00:00',
-                    "$lte": '2020-05-05T17:00:00.000+00:00'
+                    "$gte": ISODate("2020-02-26"),
+                    "$lte": ISODate("2020-06-31")
                 }
             }
         },
