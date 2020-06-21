@@ -521,34 +521,34 @@ app.get('/sum-invoice', async (req, res) => {
 
     ]);
 
-    let araysum1 = await Products.dataSize(araysum)([
-        {$count: "productExport"}
-
-
-    ]);
-
-
-    let araysum4 = await Invoices.aggregate([
-        {
-            $match: {
-                state: "active",
-                createDate: {
-                    "$gte": ISODate("2020-02-26"),
-                    "$lte": ISODate("2020-06-31")
-                }
-            }
-        },
-        {
-            $group: {
-                _id: "$createDate",
-                total: {
-                    $sum: '$totalValue'
-                },
-                count: {
-                    $sum: 1
-                }
-            }
-        }
-    ]);
+    // let araysum1 = await Products.dataSize(araysum)([
+    //     {$count: "productExport"}
+    //
+    //
+    // ]);
+    //
+    //
+    // let araysum4 = await Invoices.aggregate([
+    //     {
+    //         $match: {
+    //             state: "active",
+    //             createDate: {
+    //                 "$gte": ISODate("2020-02-26"),
+    //                 "$lte": ISODate("2020-06-31")
+    //             }
+    //         }
+    //     },
+    //     {
+    //         $group: {
+    //             _id: "$createDate",
+    //             total: {
+    //                 $sum: '$totalValue'
+    //             },
+    //             count: {
+    //                 $sum: 1
+    //             }
+    //         }
+    //     }
+    // ]);
     res.send(araysum);
 });
