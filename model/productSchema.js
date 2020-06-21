@@ -16,9 +16,9 @@ const productSchema=new mongoose.Schema({
         type: String,
         required: true,
     },
-    productExport:{
-        type: Number,
-        required: true,
-    }
+    // productExport:{
+    //     type: Number,
+    //     required: true,
+    // }
 });
 module.exports=productSchema;

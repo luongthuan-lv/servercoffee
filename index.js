@@ -322,16 +322,16 @@ app.post('/add-product', async (req, res) => {
     let addproductPrice = req.body.productPrice;
     let addproductImage = req.body.productImage;
     let addproductType = req.body.productType;
-    let addproductExport = req.body.productExport;
+  //  let addproductExport = req.body.productExport;
 
-    console.log(addproductName, addproductPrice, addproductImage,addproductType,addproductExport);
+    console.log(addproductName, addproductPrice, addproductImage,addproductType);
     try {
         const addDataProduct = new Products({
             productName: addproductName,
             productPrice: addproductPrice,
             productImage: addproductImage,
             productType:addproductType,
-            productExport:addproductExport
+            //productExport:addproductExport
         });
         if (!addDataProduct) {
             res.status(400).json({
