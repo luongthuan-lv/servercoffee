@@ -137,7 +137,7 @@ app.post('/update-pass', async (req, res) => {
     let idUser = req.body.id;
     let newpassword = req.body.password;
     try {
-        console.log( newpassword,idUser);
+        console.log(newpassword, idUser);
         const updateUser = await Users.findByIdAndUpdate(id = idUser, ({
             password: newpassword,
         }));
@@ -187,7 +187,7 @@ app.post('/add-user', async (req, res) => {
                 message: 'Thêm thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
@@ -197,18 +197,18 @@ app.post('/add-user', async (req, res) => {
 // xóa thông tin user
 app.post('/remove-user', async (req, res) => {
     let idUser = req.body.id;
-    try{
-        const removeDataUser=await Users.findByIdAndDelete(id=idUser);
-        if (!removeDataUser){
+    try {
+        const removeDataUser = await Users.findByIdAndDelete(id = idUser);
+        if (!removeDataUser) {
             res.status(400).json({
                 message: 'Xóa thất bại!'
             })
-        }else{
+        } else {
             res.json({
                 message: 'Xóa thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
@@ -219,7 +219,7 @@ app.post('/remove-user', async (req, res) => {
 // lấy danh sách user
 app.get('/get-user-list', async (req, res) => {
     let role = req.query.role;
-    let staffList=await Users.find({role:role});
+    let staffList = await Users.find({role: role});
     res.send(staffList);
 });
 
@@ -247,7 +247,7 @@ app.post('/add-customer', async (req, res) => {
                 message: 'Thêm thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
@@ -290,18 +290,18 @@ app.post('/update-customer', async (req, res) => {
 // xóa thông tin customer
 app.post('/remove-customer', async (req, res) => {
     let id = req.body.id;
-    try{
-        const removeDataCustomer=await Customers.findByIdAndDelete(id=id);
-        if (!removeDataCustomer){
+    try {
+        const removeDataCustomer = await Customers.findByIdAndDelete(id = id);
+        if (!removeDataCustomer) {
             res.status(400).json({
                 message: 'Xóa thất bại!'
             })
-        }else{
+        } else {
             res.json({
                 message: 'Xóa thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
@@ -311,7 +311,7 @@ app.post('/remove-customer', async (req, res) => {
 
 // lấy danh sách custommer
 app.get('/get-customer-list', async (req, res) => {
-    let customerList=await Customers.find({});
+    let customerList = await Customers.find({});
     res.send(customerList);
 });
 
@@ -322,15 +322,15 @@ app.post('/add-product', async (req, res) => {
     let addproductPrice = req.body.productPrice;
     let addproductImage = req.body.productImage;
     let addproductType = req.body.productType;
-  //  let addproductExport = req.body.productExport;
+    //  let addproductExport = req.body.productExport;
 
-    console.log(addproductName, addproductPrice, addproductImage,addproductType);
+    console.log(addproductName, addproductPrice, addproductImage, addproductType);
     try {
         const addDataProduct = new Products({
             productName: addproductName,
             productPrice: addproductPrice,
             productImage: addproductImage,
-            productType:addproductType,
+            productType: addproductType,
             //productExport:addproductExport
         });
         if (!addDataProduct) {
@@ -343,7 +343,7 @@ app.post('/add-product', async (req, res) => {
                 message: 'Thêm thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
@@ -360,12 +360,12 @@ app.post('/update-product', async (req, res) => {
     let newproductType = req.body.productType;
 
     try {
-        console.log(newproductName, newproductPrice, newproductImage, id,newproductType);
+        console.log(newproductName, newproductPrice, newproductImage, id, newproductType);
         const updateProduct = await Products.findByIdAndUpdate(id = id, ({
             productName: newproductName,
             productPrice: newproductPrice,
             productImage: newproductImage,
-            productType:newproductType,
+            productType: newproductType,
         }));
 
         if (!updateProduct) {
@@ -388,18 +388,18 @@ app.post('/update-product', async (req, res) => {
 // xóa thông tin product
 app.post('/remove-product', async (req, res) => {
     let id = req.body.id;
-    try{
-        const removeDataProduct=await Products.findByIdAndDelete(id=id);
-        if (!removeDataProduct){
+    try {
+        const removeDataProduct = await Products.findByIdAndDelete(id = id);
+        if (!removeDataProduct) {
             res.status(400).json({
                 message: 'Xóa thất bại!'
             })
-        }else{
+        } else {
             res.json({
                 message: 'Xóa thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
@@ -415,17 +415,15 @@ app.post('/remove-product', async (req, res) => {
 
 // lấy danh sách product theo tên
 app.get('/get-product-list', async (req, res) => {
-    let productName=req.query.productName;
-    if (productName==""){
-        let productList=await Products.find({});
+    let productName = req.query.productName;
+    if (productName == "") {
+        let productList = await Products.find({});
         res.send(productList);
-    }else{
-        let productList=await Products.find({productName:productName});
+    } else {
+        let productList = await Products.find({productName: productName});
         res.send(productList);
     }
 });
-
-
 
 
 // thêm thông tin invoice
@@ -438,21 +436,21 @@ app.post('/add-invoice', async (req, res) => {
     let adddiscountPercentage = req.body.discountPercentage;
     let addtotalValue = req.body.totalValue;
     let addstate = req.body.state;
-    let addlist=req.body.list;
+    let addlist = req.body.list;
 
 
-    console.log(addcustomerName, addcreateDate,addcreateStaff,adddiscountPercentage,addtotalValue,addstate,addlist);
+    console.log(addcustomerName, addcreateDate, addcreateStaff, adddiscountPercentage, addtotalValue, addstate, addlist);
     try {
         const addDataInvoice = new Invoices({
-            customerName:addcustomerName,
+            customerName: addcustomerName,
             // productName: addproductName,
             // numberOfProduct: addnumberOfProduct,
             createDate: addcreateDate,
-            createStaff:addcreateStaff,
-            discountPercentage:adddiscountPercentage,
-            totalValue:addtotalValue,
-            state:addstate,
-            list:addlist,
+            createStaff: addcreateStaff,
+            discountPercentage: adddiscountPercentage,
+            totalValue: addtotalValue,
+            state: addstate,
+            list: addlist,
         });
         if (!addDataInvoice) {
             res.status(400).json({
@@ -464,7 +462,7 @@ app.post('/add-invoice', async (req, res) => {
                 message: 'Thêm thành công!'
             })
         }
-    }catch (e) {
+    } catch (e) {
         res.status(400).json({
             message: 'Lỗi: ' + e
         })
@@ -476,7 +474,7 @@ app.post('/state-invoice', async (req, res) => {
     let id = req.body.id;
     let newstate = req.body.state;
     try {
-        console.log( newstate,id);
+        console.log(newstate, id);
         const updateInvoice = await Invoices.findByIdAndUpdate(id = id, ({
             state: newstate,
         }));
@@ -501,7 +499,7 @@ app.post('/state-invoice', async (req, res) => {
 // lấy danh sách invoice
 app.get('/get-invoice-list', async (req, res) => {
     let state = req.query.state;
-    let invoiceList=await Invoices.find({state:state});
+    let invoiceList = await Invoices.find({state: state});
     res.send(invoiceList);
 });
 
@@ -513,33 +511,44 @@ app.get('/sum-invoice', async (req, res) => {
     // console.log(array1.reduce(reducer));
     // res.send(array1.reduce(reducer));
 
-   // let araysum=await Invoices.distinct("totalValue");
+    // let araysum=await Invoices.distinct("totalValue");
 
     // tổng tiền hóa đơn theo ngày
-    let araysum=await Invoices.aggregate([
-        { $match: { state: "active" } },
-        { $group: { _id: "$createDate", total: { $sum: "$totalValue" } } },
-         {
-           $project: {
-               createDate: {
-                   $gte:new ISODate("2020-04-05T17:00:00.000+00:00"),
-                   $lte:new ISODate("2020-05-05T17:00:00.000+00:00")
-               }
+    let araysum = await Invoices.aggregate([
+        {$match: {state: "active"}},
+        {$group: {_id: "$createDate", total: {$sum: "$totalValue"}}},
+
+
+    ]);
+
+    let araysum1 = await Products.dataSize(araysum)([
+        {$count: "productExport"}
+
+
+    ]);
+
+
+    let araysum4 = await Invoices.aggregate([
+        {
+            $match: {
+                "state": 'active',
+                "createDate": {
+                    "$gte": '2020-04-05T17:00:00.000+00:00',
+                    "$lte": '2020-05-05T17:00:00.000+00:00'
+                }
+            }
+        },
+        {
+            $group: {
+                "_id": "$createDate",
+                total: {
+                    $sum: '$totalValue'
+                },
+                count: {
+                    $sum: 1
+                }
             }
         }
-
-
     ]);
-
-    let araysum1=await Products.dataSize(araysum)([
-        { $count: "productExport" }
-
-
-    ]);
-
-    let araysum3=await Invoices.find({"createDate":{ $gte:ISODate("2020-06-03"), $lt:ISODate("2020-06-10") }
-    }).pretty();
-    let araysum4=await Invoices.insert({"OrderId":1,"OrderAddrees":"US","OrderDateTime":ISODate("2019-02-19")});
-
     res.send(araysum4);
 });
