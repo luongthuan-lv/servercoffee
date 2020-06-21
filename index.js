@@ -516,8 +516,8 @@ app.get('/sum-invoice', async (req, res) => {
     // tổng tiền hóa đơn theo ngày
     let araysum = await Invoices.aggregate([
         {$match: {state: "active",createDate: {
-                        "$gte": '2020-03-05T17:00:00.000',
-                        "$lte": '2020-06-05T17:00:00.000'
+                        "$gte": ISODate("2020-03-26"),
+                        "$lte": ISODate("2020-06-20")
                     }}},
         {$group: {_id: "$createDate", total: {$sum: "$totalValue"}}},
 
