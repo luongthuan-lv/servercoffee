@@ -521,8 +521,8 @@ app.get('/sum-invoice', async (req, res) => {
         { $group: { _id: "$createDate", total: { $sum: "$totalValue" } } },
         {
             $project: {
-                dataList: {
-                    $filter: {
+                // dataList: {
+                //     $filter: {
                         // input: "$dataList",
                         // as: "item",
                         // cond: {
@@ -535,8 +535,8 @@ app.get('/sum-invoice', async (req, res) => {
                                 },
                             ]
                        // }
-                    }
-                }
+                //     }
+                // }
             }
         }
 
