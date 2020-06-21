@@ -531,8 +531,8 @@ app.get('/sum-invoice', async (req, res) => {
     let araysum4 = await Invoices.aggregate([
         {
             $match: {
-                "state": 'active',
-                "createDate": {
+                state: "active",
+                createDate: {
                     "$gte": '2020-04-05T17:00:00.000+00:00',
                     "$lte": '2020-05-05T17:00:00.000+00:00'
                 }
@@ -540,7 +540,7 @@ app.get('/sum-invoice', async (req, res) => {
         },
         {
             $group: {
-                "_id": "$createDate",
+                _id: "$createDate",
                 total: {
                     $sum: '$totalValue'
                 },
