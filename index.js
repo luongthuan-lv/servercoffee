@@ -504,31 +504,11 @@ app.get('/get-invoice-list', async (req, res) => {
 });
 
 app.get('/count-invoice', async (req, res) => {
-    // const array1 = [1, 2, 3, 4];
-    // const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    //
-    //
-    // console.log(array1.reduce(reducer));
-    // res.send(array1.reduce(reducer));
 
-    // let araysum=await Invoices.distinct("totalValue");
 
     // tổng tiền hóa đơn theo ngày
-    // let araysum = await Invoices.aggregate([
-    //     {$match: {state: "active"
-    //             // ,createDate: {
-    //             //         "$gte": '05/20/2020',
-    //             //         "$lte": '06/25/2020'
-    //             //     }
-    //          }},
-    //     {$group: {_id: "$createDate", total: {$sum: "$totalValue"},count: {
-    //                           $sum: 1
-    //    }}},
-    //
-    //
-    // ]);
 
-    let araysum = await Invoices.aggregate([
+    let araysum1 = await Invoices.aggregate([
         {$match: {state: "active"
                 ,createDate: {
                         "$gte": '04/02/2020',
@@ -541,5 +521,5 @@ app.get('/count-invoice', async (req, res) => {
 
 
     ]);
-    res.send(araysum);
+    res.send(araysum1);
 });
