@@ -549,5 +549,5 @@ app.get('/sum-invoice', async (req, res) => {
 
     ]);
 
-    res.send(araysum1);
+    res.send(araysum);
 });
