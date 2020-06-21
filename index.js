@@ -523,7 +523,11 @@ app.get('/sum-invoice', async (req, res) => {
 
     ]);
 
-    let araysum1=await Invoices.count( { ord_dt: { $gt: new Date('04/06/2020') } } );
+    let araysum1=await Products.aggregate([
+        { $count: "productExport" }
+
+
+    ]);
 
     res.send(araysum1);
 });
