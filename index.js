@@ -519,26 +519,26 @@ app.get('/sum-invoice', async (req, res) => {
     let araysum=await Invoices.aggregate([
         { $match: { state: "active" } },
         { $group: { _id: "$createDate", total: { $sum: "$totalValue" } } },
-        {
-            $project: {
-                // dataList: {
-                     $filter: {
-                        // input: "$dataList",
-                        // as: "item",
-                        // cond: {
-                            $and: [
-                                {
-                                    $gte: [ "$$createDate", new Date(`2020-04-05T17:00:00.000+00:00`) ]
-                                },
-                                {
-                                    $lte: [ "$$createDate", new Date(`2020-05-05T17:00:00.000+00:00`) ]
-                                },
-                            ]
-                       // }
-                     }
-                // }
-            }
-        }
+        // {
+        //     $project: {
+        //         // dataList: {
+        //              $filter: {
+        //                 // input: "$dataList",
+        //                 // as: "item",
+        //                 // cond: {
+        //                     $and: [
+        //                         {
+        //                             $gte: [ "$$createDate", new Date(`2020-04-05T17:00:00.000+00:00`) ]
+        //                         },
+        //                         {
+        //                             $lte: [ "$$createDate", new Date(`2020-05-05T17:00:00.000+00:00`) ]
+        //                         },
+        //                     ]
+        //                // }
+        //              }
+        //         // }
+        //     }
+        // }
 
 
     ]);
@@ -549,5 +549,7 @@ app.get('/sum-invoice', async (req, res) => {
 
     ]);
 
-    res.send(araysum);
+    let araysum3=await Invoices.find( {"createDate": {'$gte': '2020-04-05T17:00:00.000+00:00','$lt': '2020-05-05T17:00:00.000+00:00'}});
+
+    res.send(araysum3);
 });
