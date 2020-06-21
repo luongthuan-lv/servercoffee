@@ -523,5 +523,7 @@ app.get('/sum-invoice', async (req, res) => {
 
     ]);
 
-    res.send(araysum);
+    let araysum1=await Invoices.count( { ord_dt: { $gt: new Date('04/06/2020') } } );
+
+    res.send(araysum1);
 });
