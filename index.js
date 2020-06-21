@@ -508,7 +508,7 @@ app.get('/count-invoice', async (req, res) => {
 
     // tổng tiền hóa đơn theo ngày
 
-    let araysum1 = await Invoices.aggregate([
+    let araysum = await Invoices.aggregate([
         {$match: {state: "active"
                 ,createDate: {
                         "$gte": '04/02/2020',
@@ -521,5 +521,5 @@ app.get('/count-invoice', async (req, res) => {
 
 
     ]);
-    res.send(araysum1);
+    res.send(araysum);
 });
