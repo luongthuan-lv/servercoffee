@@ -551,8 +551,8 @@ app.get('/sum-invoice', async (req, res) => {
 
     let araysum3=await Invoices.find({
         createDate: {
-            $gte:"2020-05-05T17:00:00.000+00:00",
-            $lt: "2020-04-05T17:00:00.000+00:00"
+            $gte:"2020-04-05T17:00:00.000+00:00",
+            $lt: "2020-05-05T17:00:00.000+00:00"
         }
     });
 
