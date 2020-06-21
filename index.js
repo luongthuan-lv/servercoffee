@@ -521,7 +521,6 @@ app.get('/count-invoice', async (req, res) => {
 
 
     ]);
-
-    let sum=await Invoices.aggregate(araysum);
-    res.send(sum);
+    
+    res.send(araysum);
 });
