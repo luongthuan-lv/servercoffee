@@ -507,6 +507,7 @@ app.get('/count-invoice', async (req, res) => {
       let startDate=req.query.startDate;
       let endDate=req.query.endDate;
       let state=req.query.state;
+
     // tổng tiền hóa đơn theo ngày
 
     let araysum = await Invoices.aggregate([
