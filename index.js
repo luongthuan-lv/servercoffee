@@ -504,16 +504,16 @@ app.get('/get-invoice-list', async (req, res) => {
 });
 
 app.get('/count-invoice', async (req, res) => {
-      let gte=req.query.gte;
-      let lte=req.query.lte;
-
+      let startDate=req.query.startDate;
+      let endDate=req.query.endDate;
+      let state=req.query.state;
     // tổng tiền hóa đơn theo ngày
 
     let araysum = await Invoices.aggregate([
-        {$match: {state: "active"
+        {$match: {state: state
                 ,createDate: {
-                        "$gte": gte,
-                        "$lte": lte
+                        "$gte": startDate,
+                        "$lte": endDate
                     }
             }},
         {$group: {_id: "$createDate", total: {$sum: "$totalValue"},count: {
