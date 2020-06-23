@@ -258,14 +258,10 @@ app.post('/add-customer', async (req, res) => {
 // sửa thông tin customer
 app.post('/update-customer', async (req, res) => {
     let id = req.body.id;
-    let newcustomerName = req.body.customerName;
-    let newcustomerPhone = req.body.customerPhone;
     let newcustomerInvoiceSum = req.body.customerInvoiceSum;
     try {
-        console.log(newcustomerName, newcustomerPhone, newcustomerInvoiceSum, id);
+        console.log( newcustomerInvoiceSum, id);
         const updateCustomer = await Customers.findByIdAndUpdate(id = id, ({
-            customerName: newcustomerName,
-            customerPhone: newcustomerPhone,
             customerInvoiceSum: newcustomerInvoiceSum,
 
         }));
